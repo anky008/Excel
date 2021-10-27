@@ -1,0 +1,171 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.page-actions-cont{
+    height: 2.5rem;
+    background-color: #218c74;
+    display: flex;
+    align-items: flex-end;
+    padding-left: 0.5rem;
+}
+
+.page-actions{
+    margin: 0.5rem;
+    color: #ecf0f1;
+}
+
+.cell-actions-cont{
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    background-color: #f5f6fa;
+}
+
+.font-family-dropdown{
+    padding: 0.1rem;
+}
+
+.font-size-dropdown{
+    padding: 0.1rem;
+}
+
+.cell-actions-cont > * {
+    display: inline-block;
+    margin: 0.5rem;
+}
+
+.cell-actions-cont > select{
+    border: none;
+    outline: none;
+    border-radius: 0.2rem;
+}
+
+.formula-actions-cont{
+    height: 2.5rem;
+    padding-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    background-color: #f5f6fa;
+}
+
+.formula-actions-cont > *{
+    margin-right: 0.5rem;
+    outline: none;
+}
+
+.address-bar{
+    width: 5rem;
+    height: 75%;
+    text-align: center;
+}
+
+.formula-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.formula-bar{
+    width: calc(100vw - 5rem - 2rem);
+    height: 75%;
+}
+
+.sheets-cont{
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    background-color: #dcdde1;
+    padding-left: 0.5rem;
+}
+
+.sheets-cont > *{
+    display: inline-block;
+}
+
+.sheet-add-icon{
+    width: 2rem;
+}
+
+.sheets-list-cont{
+    width: calc( 100vw - 2rem );
+    height: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.sheet{
+    padding-left: 0.5rem;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.grid-cont{
+    height: calc( 100vh - 2.5rem - 2.5rem - 2.5rem - 2.5rem );
+    position: relative;
+    overflow: scroll;
+    background-color: #ecf0f1;
+}
+
+.dummy-cell{
+    height: 2rem;
+    width: 2rem;
+    position: fixed;
+    z-index: 1;
+    background-color: #747d8c;
+}
+
+.row-address-cont{
+    position: sticky;
+    top: 2rem;
+    left: 0rem;
+}
+
+.row-address-cell{
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #dfe4ea;
+}
+
+/* contains the cells with address as well as other cells with data */
+.cells-cont{
+    position: absolute;
+    top: 0;
+    left: 2rem;
+}
+
+.col-address-cont{
+    display: flex;
+    justify-content: space-around;
+    height: 2rem;
+    position: sticky;
+    top: 0;
+    left: 2rem;
+}
+
+.col-address-cell{
+    width: calc( 200vw / 26 );
+    border: 1px solid #dfe4ea;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.grid-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.grid-cell{
+    height: 2rem;
+    width: calc( 200vw / 26 );
+    border: 1px solid #dfe4ea;
+    outline: none;
+}
