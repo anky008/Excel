@@ -38,13 +38,43 @@ body{
 
 .cell-actions-cont > * {
     display: inline-block;
-    margin: 0.5rem;
+    margin: 0.7rem;
+}
+
+.cell-actions-cont > *:hover{
+    cursor: pointer;
 }
 
 .cell-actions-cont > select{
     border: none;
     outline: none;
     border-radius: 0.2rem;
+}
+
+.text-color-cont{
+    position: relative;
+}
+
+.text-color-picker{
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.cell-color-cont{
+    position: relative;
+}
+
+.cell-color-picker{
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
 }
 
 .formula-actions-cont{
@@ -168,4 +198,5 @@ body{
     width: calc( 200vw / 26 );
     border: 1px solid #dfe4ea;
     outline: none;
+    text-align: center;
 }
