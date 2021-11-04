@@ -13,8 +13,11 @@ for (let row = 0; row < rows; row++) {
             "align_right": false,
             "color": "#000000",
             "background_color" : "#ecf0f1",
-            "font" : "Monospace",
-            "font_size" : "14"
+            "font" : "monospace",
+            "font_size" : "14",
+            "text" : "",
+            "formula" : "",
+            "children" : [],
         }
         row_arr.push(props);
     }
@@ -28,26 +31,90 @@ let highlighted_bg_color="#bdc3c7";
 
 let grid_cells=document.querySelectorAll(".grid-cell");
 
-function decodeCellAddr() {
 
-    let add_bar_text = add_cont.value;
+// for every active cell highlight the properties which are applied to it
+for(let i=0;i<grid_cells.length;i++){
+    grid_cells[i].addEventListener("click",function(e){
+        let cell_addr=add_cont.value;                   
+        let [row,col]=decodeCellAddr(cell_addr); 
+
+        if(props_arr[row][col].bold==true){
+            bold_icon.style.backgroundColor=highlighted_bg_color;
+        }
+
+        else{
+            bold_icon.style.backgroundColor=normal_bg_color;
+        }
+
+        if(props_arr[row][col].italic==true){
+            italic_icon.style.backgroundColor=highlighted_bg_color;
+        }
+
+        else{
+            italic_icon.style.backgroundColor=normal_bg_color;
+        }
+
+        if(props_arr[row][col].underline==true){
+            underline_icon.style.backgroundColor=highlighted_bg_color;
+        }
+
+        else{
+            underline_icon.style.backgroundColor=normal_bg_color;
+        }
+
+        if(props_arr[row][col].align_left==true){
+            align_left_icon.style.backgroundColor=highlighted_bg_color;
+        }
+
+        else{
+            align_left_icon.style.backgroundColor=normal_bg_color;
+        }
+
+        if(props_arr[row][col].align_right==true){
+            align_right_icon.style.backgroundColor=highlighted_bg_color;
+        }
+
+        else{
+            align_right_icon.style.backgroundColor=normal_bg_color;
+        }
+
+        if(props_arr[row][col].align_center==true){
+            align_center_icon.style.backgroundColor=highlighted_bg_color;
+        }
+
+        else{
+            align_center_icon.style.backgroundColor=normal_bg_color;
+        }
+
+        formula_bar.value=props_arr[row][col].formula;
+        font_type_dropdown.value=props_arr[row][col].font;
+        font_size_dropdown.value=props_arr[row][col].font_size;
+    })
+}
+
+// given an address like A1 returns [row,col] corresponding to that cell
+function decodeCellAddr(addr) {
+
+    if(addr==undefined){
+        addr=add_cont.value;       
+    } 
+
+    let add_bar_text = addr
     let col = add_bar_text.charCodeAt(0) - 65;//add_bar_text[0];
     let row = parseInt(add_bar_text.slice(1)) - 1;
     return [row, col];
 }
 
+// event listners for all icons
 bold_icon.addEventListener("click", function (e) {
 
     let [row, col] = decodeCellAddr();
 
     props_arr[row][col].bold = !props_arr[row][col].bold;
 
-    console.log("bold icon clicked");
-    console.log("active:", row, col);
-
     let curr_cell = document.querySelector(`.grid-cell[rid="${row}"][cid="${col}"]`);
 
-    if (props_arr[row][col].bold == false) {
+    if (props_arr[row][col].bold == true) {
         curr_cell.style.fontWeight = "bold";
         bold_icon.style.backgroundColor=highlighted_bg_color;
     }
@@ -205,14 +272,12 @@ font_type_dropdown.addEventListener("change",function(e){
     let [row,col]=decodeCellAddr();
     let picked_font=font_type_dropdown.value;
     props_arr[row][col].font=picked_font;
-    props_arr[row][col].font_size=picked_font;
     let curr_cell = document.querySelector(`.grid-cell[rid="${row}"][cid="${col}"]`);
     curr_cell.style.fontFamily=picked_font;
 })
 
 font_size_dropdown.addEventListener("change",function(e){
 
-    console.log("font size changed!");
     let [row,col]=decodeCellAddr();
     let picked_font_size=font_size_dropdown.value;
     props_arr[row][col].font_size=picked_font_size;
