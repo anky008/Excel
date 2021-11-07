@@ -17,6 +17,10 @@ let font_size_dropdown=document.querySelector(".font-size-dropdown");
 let rows=100;
 let cols=26;
 
+let normal_bg_color = "#ecf0f1";
+let highlighted_bg_color = "#bdc3c7";
+
+
 for(let row=0;row<rows;row++){
     let row_add_child=document.createElement("div");
     row_add_child.setAttribute("class","row-address-cell");
@@ -59,7 +63,6 @@ for(let row=0;row<rows;row++){
 
 function display_address(cell,row,col){
     cell.addEventListener("click",function(e){
-        console.log(row,col,"clicked!");
         let row_id=row+1;
         let col_id=String.fromCharCode(65+col);
         add_cont.value=col_id+row_id;

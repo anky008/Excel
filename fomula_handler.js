@@ -55,9 +55,10 @@ function has_cycle_component(addr, visited, in_stack) {
             break;
         }
 
-        if (visited[children[i]] == false) {
-            found_cycle = has_cycle_component(children[i], visited, in_stack);
-            if (found_cycle == true) {
+        else if (visited[children[i]] == false) {
+            let inside_found_cycle = has_cycle_component(children[i], visited, in_stack);
+            if (inside_found_cycle == true) {
+                found_cycle=true;
                 break;
             }
         }
@@ -90,8 +91,10 @@ function has_cycle() {
             if (visited[addr] == false) {
                 let cycle = has_cycle_component(addr, visited, in_stack);
                 if (cycle) {
-                    found_cycle = true;
+                    // this component has cycle
                     cycle_start_addr=addr;
+
+                    found_cycle = true;
                     break;
                 }
             }
@@ -103,9 +106,6 @@ function has_cycle() {
     }
 
     return [found_cycle,cycle_start_addr];
-    //if (found_cycle) {
-    //    alert("cycle found please update the formulas!!");
-    //}
 }
 
 
@@ -115,23 +115,22 @@ formula_bar.addEventListener("keydown", function (e) {
 
     if (e.key === "Enter" && formula) {
 
-        console.log("Enter pressed!!", "current formula:", formula);
+        // console.log("Enter pressed!!", "current formula:", formula);
 
         let val = evaluate(formula);
         let [arow, acol] = decodeCellAddr();
-        console.log("row:", arow, "col:", acol, "value:", val);
         let active_cell = document.querySelector(`.grid-cell[rid="${arow}"][cid="${acol}"]`);
 
 
         // if formula corresponding to current cell is changed then we need to remove old children of current cell
         remove_children(add_cont.value);
 
-        let [found_cycle,addr] = has_cycle();
-        console.log("cycle found ? :", found_cycle,"cycle start addr:",addr);
+        let [found_cycle,cycle_start_addr] = has_cycle();
+        console.log("cycle found ? :", found_cycle);
 
         if(found_cycle){
             props_arr[arow][acol].formula = formula;
-            clear_cell(addr);
+            clear_cell(cycle_start_addr);
             alert("cycle found!! please change values or formula");
         }
 
@@ -246,6 +245,8 @@ function remove_children(child_addr) {
 
 function evaluate(formula) {
 
+    let need_to_eval=true;
+    
     let elems = formula.split(" ");
     for (let i = 0; i < elems.length; i++) {
         let ascii = elems[i].charCodeAt(0);
@@ -255,10 +256,18 @@ function evaluate(formula) {
             let [arow, acol] = decodeCellAddr(elems[i]);
             let active_cell = document.querySelector(`.grid-cell[rid="${arow}"][cid="${acol}"]`);
             let val = active_cell.innerText;
+            
+            // if some dependency cell has a #REF means part of a cycle then val of current cell can't be evaluated
+            if(val=="#REF"){
+                need_to_eval=false;
+                break;
+            }
+
             elems[i] = val;
         }
     }
 
+    if(need_to_eval==false) return "#REF";
     formula = elems.join(" ");
     return eval(formula);
 }

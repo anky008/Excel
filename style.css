@@ -120,13 +120,7 @@ body{
 
 .sheet-add-icon{
     width: 2rem;
-}
-
-.sheets-list-cont{
-    width: calc( 100vw - 2rem );
-    height: 80%;
-    display: flex;
-    align-items: center;
+    margin-bottom: 0.3rem;
 }
 
 .sheet{
@@ -136,7 +130,7 @@ body{
 }
 
 .grid-cont{
-    height: calc( 100vh - 2.5rem - 2.5rem - 2.5rem - 2.5rem );
+    height: calc( 100vh - 2.5rem - 2.5rem - 2.5rem - 1.6rem );
     position: relative;
     overflow: scroll;
     background-color: #ecf0f1;
@@ -199,4 +193,37 @@ body{
     border: 1px solid #dfe4ea;
     outline: none;
     text-align: center;
+}
+
+.sheets-folder-cont{
+    width: calc( 100vw - 2rem );
+    height: 1.6rem;
+    display: flex;
+    align-items: center;
+    display: flex;
+    overflow: auto;
+}
+
+.sheets-folder-cont > *{
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+
+.sheets-folder-cont > *:hover{
+    cursor: default; 
+}
+
+.sheet-folder{
+    height: 100%;
+    text-decoration: underline;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.sheet-content{
+    width : 4rem;
+
 }
