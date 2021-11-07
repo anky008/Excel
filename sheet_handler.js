@@ -2,6 +2,22 @@ let sheet_add_icon = document.querySelector(".sheet-add-icon");
 let sheets_cont = document.querySelector(".sheets-folder-cont");
 let active_sheet_idx=-1;
 
+let default_props_obj={
+    "bold": false,
+    "italic": false,
+    "underline": false,
+    "align_left": false,
+    "align_center": false,
+    "align_right": false,
+    "color": "#000000",
+    "background_color": "#ecf0f1",
+    "font": "monospace",
+    "font_size": "14",
+    "text": "",
+    "formula": "",
+    "children": [],
+};
+
 window.addEventListener("contextmenu", e => e.preventDefault());
 
 sheet_add_icon.addEventListener("click", function (e) {

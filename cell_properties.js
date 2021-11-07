@@ -3,30 +3,7 @@ let sheets_props_arr = [];
 // contains properties corresponding to each cell for 1 sheet
 let props_arr = [];
 
-// for (let row = 0; row < rows; row++) {
-//     let row_arr = [];
-//     for (let col = 0; col < cols; col++) {
-//         let props = {
-//             "bold": false,
-//             "italic": false,
-//             "underline": false,
-//             "align_left": false,
-//             "align_center": false,
-//             "align_right": false,
-//             "color": "#000000",
-//             "background_color": "#ecf0f1",
-//             "font": "monospace",
-//             "font_size": "14",
-//             "text": "",
-//             "formula": "",
-//             "children": [],
-//         }
-//         row_arr.push(props);
-//     }
-
-//     props_arr.push(row_arr);
-// }
-
+// to add 1st sheet by default
 sheet_add_icon.click();
 
 let grid_cells = document.querySelectorAll(".grid-cell");
@@ -37,23 +14,14 @@ for (let i = 0; i < grid_cells.length; i++) {
     })
 }
 
-let arr = [];
-for (let i = 0; i < 100; i++) {
-    arr.push(false);
-}
 
 function apply_cell_props() {
-
-    if (arr[active_sheet_idx] == false) {
-        console.log("curr active sheet:", active_sheet_idx);
-        console.log("props arr:", props_arr);
-        console.log("sheets props arr:",sheets_props_arr);
-    }
 
     let cell_addr = add_cont.value;
     let [row, col] = decodeCellAddr(cell_addr);
     let curr_cell = document.querySelector(`.grid-cell[rid="${row}"][cid="${col}"]`);
 
+    console.log(props_arr);
     curr_cell.innerText = props_arr[row][col].text;
 
     if (props_arr[row][col].bold == true) {
@@ -160,9 +128,6 @@ italic_icon.addEventListener("click", function (e) {
     let [row, col] = decodeCellAddr();
     props_arr[row][col].italic = !props_arr[row][col].italic;
 
-    console.log("italic icon clicked");
-    console.log("active:", row, col);
-
     let curr_cell = document.querySelector(`.grid-cell[rid="${row}"][cid="${col}"]`);
 
     if (props_arr[row][col].italic == true) {
@@ -180,9 +145,6 @@ underline_icon.addEventListener("click", function (e) {
 
     let [row, col] = decodeCellAddr();
     props_arr[row][col].underline = !props_arr[row][col].underline;
-
-    console.log("underline icon clicked");
-    console.log("active:", row, col);
 
     let curr_cell = document.querySelector(`.grid-cell[rid="${row}"][cid="${col}"]`);
 
@@ -202,9 +164,6 @@ align_left_icon.addEventListener("click", function (e) {
     let [row, col] = decodeCellAddr();
     props_arr[row][col].align_left = !props_arr[row][col].align_left;
 
-    console.log("align left icon clicked");
-    console.log("active:", row, col);
-
     let curr_cell = document.querySelector(`.grid-cell[rid="${row}"][cid="${col}"]`);
 
     if (props_arr[row][col].align_left == true) {
@@ -221,7 +180,6 @@ align_left_icon.addEventListener("click", function (e) {
 
     else {
         curr_cell.style.textDecoration = "none";
-
         align_left_icon.style.backgroundColor = normal_bg_color;
     }
 })
